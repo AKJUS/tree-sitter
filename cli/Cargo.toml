@@ -12,6 +12,9 @@ license.workspace = true
 keywords.workspace = true
 categories.workspace = true
 
+[lints]
+workspace = true
+
 [[bin]]
 name = "tree-sitter"
 path = "src/main.rs"
@@ -27,9 +30,12 @@ wasm = ["tree-sitter/wasm", "tree-sitter-loader/wasm"]
 [dependencies]
 anstyle.workspace = true
 anyhow.workspace = true
+bstr.workspace = true
 clap.workspace = true
+clap_complete.workspace = true
 ctor.workspace = true
 ctrlc.workspace = true
+dialoguer.workspace = true
 dirs.workspace = true
 filetime.workspace = true
 glob.workspace = true
@@ -50,19 +56,19 @@ serde_derive.workspace = true
 serde_json.workspace = true
 similar.workspace = true
 smallbitvec.workspace = true
+streaming-iterator.workspace = true
 tiny_http.workspace = true
+url.workspace = true
 walkdir.workspace = true
 wasmparser.workspace = true
 webbrowser.workspace = true
 
 tree-sitter.workspace = true
+tree-sitter-generate.workspace = true
 tree-sitter-config.workspace = true
 tree-sitter-highlight.workspace = true
 tree-sitter-loader.workspace = true
 tree-sitter-tags.workspace = true
-
-[target."cfg(windows)".dependencies]
-url = "2.5.2"
 
 [dev-dependencies]
 tree_sitter_proc_macro = { path = "src/tests/proc_macro", package = "tree-sitter-tests-proc-macro" }

@@ -83,9 +83,9 @@ static void ts_lexer__get_lookahead(Lexer *self) {
   }
 
   const uint8_t *chunk = (const uint8_t *)self->chunk + position_in_chunk;
-  UnicodeDecodeFunction decode = self->input.encoding == TSInputEncodingUTF8
-    ? ts_decode_utf8
-    : ts_decode_utf16;
+  UnicodeDecodeFunction decode =
+    self->input.encoding == TSInputEncodingUTF8 ? ts_decode_utf8 :
+    self->input.encoding == TSInputEncodingUTF16LE ? ts_decode_utf16_le : ts_decode_utf16_be;
 
   self->lookahead_size = decode(chunk, size, &self->data.lookahead);
 
@@ -252,12 +252,12 @@ static uint32_t ts_lexer__get_column(TSLexer *_self) {
   uint32_t goal_byte = self->current_position.bytes;
 
   self->did_get_column = true;
-  self->current_position.bytes -= self->current_position.extent.column;
-  self->current_position.extent.column = 0;
-
-  if (self->current_position.bytes < self->chunk_start) {
-    ts_lexer__get_chunk(self);
-  }
+  Length start_of_col = {
+    self->current_position.bytes - self->current_position.extent.column,
+    {self->current_position.extent.row, 0},
+  };
+  ts_lexer_goto(self, start_of_col);
+  ts_lexer__get_chunk(self);
 
   uint32_t result = 0;
   if (!ts_lexer__eof(_self)) {

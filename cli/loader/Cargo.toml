@@ -12,6 +12,9 @@ license.workspace = true
 keywords.workspace = true
 categories.workspace = true
 
+[lints]
+workspace = true
+
 [features]
 wasm = ["tree-sitter/wasm"]
 # TODO: For backward compatibility these must be enabled by default,
@@ -26,11 +29,14 @@ fs4.workspace = true
 indoc.workspace = true
 libloading.workspace = true
 once_cell.workspace = true
+path-slash.workspace = true
 regex.workspace = true
+semver.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 tempfile.workspace = true
+url.workspace = true
 
-tree-sitter = {workspace = true}
-tree-sitter-highlight = {workspace = true, optional = true}
-tree-sitter-tags = {workspace = true, optional = true}
+tree-sitter = { workspace = true }
+tree-sitter-highlight = { workspace = true, optional = true }
+tree-sitter-tags = { workspace = true, optional = true }
